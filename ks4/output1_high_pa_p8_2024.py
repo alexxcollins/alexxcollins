@@ -65,20 +65,27 @@ def national_high_pa_p8():
     raise RuntimeError(f"No state-funded group in {list(df.index)}")
 
 
-def main():
+def fetch_school_rows(periods, urns=SCHOOLS):
+    """High-PA and all-pupil rows from the EES API for the given AY periods
+    (e.g. ["2023/2024"]), all other characteristic filters pinned to Total."""
     m = ees.meta(DATA_SET)
     ind_ids = {i["column"]: i["id"] for i in m["indicators"]}
     filt = {f["column"]: {o["label"]: o["id"] for o in f["options"]} for f in m["filters"]}
 
-    # Every non-prior-attainment filter pinned to Total; prior attainment High + Total.
     filter_ids = [filt["prior_attainment"]["High prior attainment"],
                   filt["prior_attainment"]["Total"]]
     filter_ids += [opts["Total"] for col, opts in filt.items() if col != "prior_attainment"]
 
+    # A renamed school has one location option per name, all sharing the URN,
+    # but filtering by {"urn": ...} only matches the current name. Query by
+    # every location id carrying the URN instead.
+    sch = next(lvl for lvl in m["locations"] if lvl["level"]["code"] == "SCH")
+    loc_ids = [o["id"] for o in sch["options"] if o.get("urn") in urns]
+
     criteria = {
         "and": [
-            {"timePeriods": {"in": [PERIOD]}},
-            {"locations": {"in": [{"level": "SCH", "urn": u} for u in SCHOOLS]}},
+            {"timePeriods": {"in": [{"period": p, "code": "AY"} for p in periods]}},
+            {"locations": {"in": [{"level": "SCH", "id": i} for i in loc_ids]}},
             {"filters": {"in": filter_ids}},
         ]
     }
@@ -86,11 +93,15 @@ def main():
     if warnings:
         print("API warnings:", warnings)
     df = ees.results_to_frame(rows, m)
-
-    # Keep rows where all other characteristic filters are Total.
     others = [c for c in filt if c != "prior_attainment"]
-    df = df[(df[others] == "Total").all(axis=1)]
-    df = df.rename(columns=INDICATORS)
+    df = df[(df[others] == "Total").all(axis=1)].rename(columns=INDICATORS)
+    # 2023/2024 -> 2023/24
+    df["time_period"] = df["time_period"].str.replace(r"/20(\d\d)$", r"/\1", regex=True)
+    return df
+
+
+def main():
+    df = fetch_school_rows([PERIOD["period"]])
 
     hi = df[df.prior_attainment == "High prior attainment"].set_index("urn")
     al = df[df.prior_attainment == "Total"].set_index("urn")

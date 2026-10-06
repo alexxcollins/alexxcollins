@@ -7,8 +7,10 @@ import requests
 
 BASE = "https://api.education.gov.uk/statistics/v1"
 
-# DfE suppression / special codes -> NaN (never 0)
-SUPPRESSION_CODES = {"z", "c", "x", "low", "u", "k", ":", ""}
+# DfE suppression / special codes -> NaN (never 0). The second group are the
+# codes used in the legacy performance-tables CSV downloads.
+SUPPRESSION_CODES = {"z", "c", "x", "low", "u", "k", ":", "",
+                     "supp", "ne", "np", "na", "lowcov", "new", "dns"}
 
 
 def get(path, **params):
