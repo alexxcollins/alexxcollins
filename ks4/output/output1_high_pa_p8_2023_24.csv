@@ -1,0 +1,12 @@
+urn,school,la_name,hpa_p8_avg,hpa_p8_ci_low,hpa_p8_ci_upp,hpa_n_in_p8,hpa_a8_avg,hpa_n_pupils,all_p8_avg,all_n_pupils,hpa_share_of_cohort,hpa_p8_ci_vs_zero,national_hpa_p8_avg,national_hpa_a8_avg,hpa_p8_minus_national_hpa,time_period,source_data_set
+134693,Mossbourne Community Academy,Hackney,1.41,1.07,1.75,68.0,79.9,68.0,1.47,206.0,0.33,above 0,0.03,66.1,1.38,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+140210,Mossbourne Victoria Park Academy,Hackney,1.29,0.86,1.73,41.0,79.7,41.0,1.54,162.0,0.253,above 0,0.03,66.1,1.26,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+137442,Clapton Girls' Academy,Hackney,0.83,0.44,1.21,52.0,74.0,52.0,0.84,175.0,0.297,above 0,0.03,66.1,0.8,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+102055,The Latymer School,Enfield,0.73,0.53,0.94,176.0,81.2,176.0,0.74,191.0,0.921,above 0,0.03,66.1,0.7,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+143756,City of London Academy Shoreditch Park,Hackney,0.69,0.14,1.25,25.0,75.0,25.0,0.68,88.0,0.284,above 0,0.03,66.1,0.66,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+135835,"The City Academy, Hackney",Hackney,0.61,0.19,1.02,44.0,71.0,44.0,0.56,184.0,0.239,above 0,0.03,66.1,0.58,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+131062,The Excelsior Academy,Hackney,0.49,0.04,0.95,37.0,69.9,37.0,0.46,176.0,0.21,above 0,0.03,66.1,0.46,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+134314,St Mary Magdalene Academy,Islington,0.48,0.15,0.8,73.0,73.7,73.0,0.3,198.0,0.369,above 0,0.03,66.1,0.45,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+100279,Stoke Newington School,Hackney,0.46,0.14,0.77,78.0,69.7,78.0,0.28,251.0,0.311,above 0,0.03,66.1,0.43,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+131609,The Bridge Academy,Hackney,0.23,-0.13,0.6,58.0,69.8,58.0,0.51,172.0,0.337,spans 0,0.03,66.1,0.2,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
+147653,Waterside Academy,Hackney,,,,,,2.0,1.04,93.0,0.022,,0.03,66.1,,2023/24,19e39901-a96c-be76-b9c2-6af54ae076d2
