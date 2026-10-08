@@ -5,6 +5,7 @@ it is only on the performance tables service ("Compare school and college
 performance"). Its Azure front door rejects non-browser user agents, hence
 the explicit User-Agent header.
 """
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -34,7 +35,11 @@ def download(year):
     CACHE.mkdir(parents=True, exist_ok=True)
     path = CACHE / f"ks4_{year}.csv"
     if not path.exists():
-        r = requests.get(URL.format(year=year), headers={"User-Agent": UA}, timeout=300)
+        for attempt in range(4):  # the front door occasionally returns a transient 403
+            r = requests.get(URL.format(year=year), headers={"User-Agent": UA}, timeout=300)
+            if r.status_code != 403:
+                break
+            time.sleep(2 ** (attempt + 1))
         r.raise_for_status()
         if "csv" not in r.headers.get("content-type", ""):
             raise RuntimeError(f"Unexpected content type for {year}: {r.headers.get('content-type')}")
